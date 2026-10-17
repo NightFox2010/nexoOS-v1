@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nexoOS v1</title>
+
+    <link rel="stylesheet" href="css-files/Main.css">
+    <link rel="stylesheet" href="css-files/desktop.css">
+    <link rel="stylesheet" href="css-files/boot.css">
+    <link rel="stylesheet" href="css-files/taskbar-icons.css">
+    <link rel="stylesheet" href="css-files/taskbar.css">
+    <link rel="stylesheet" href="css-files/main-menu.css">
+    <link rel="stylesheet" href="css-files/settings.css">
+</head>
+
+<body>
+    <div id="boot-screen">
+        <h1>nexoOS v1</h1>
+    </div>
+
+    <div id="desktop">
+        <div id="taskbar">
+            <button id="home-button"><img src="../images/house.svg" alt="Home" class="home-icon"></button>
+
+            <input type="text" id="terminal" name="terminal" placeholder="user@nexoOS:~$">
+
+            <div id="clock">00:00:00</div>
+        </div>
+
+        <div id="menu-overlay"></div>
+        <div id="menu">
+            <h1>Menu</h1>
+            <label for="return-button">Exit</label>
+            <button class="return-button"><img src="../images/x.svg" alt="Return"></button>
+
+            <label for="power-button">Power Off</label>
+            <button id="power-button"><img src="../images/power.svg" alt="Power"></button>
+
+            <label for="settings-button">Settings</label>
+            <button id="settings-button"><img src="../images/settings.svg" alt="Settings"></button>
+        </div>
+
+        <div id="settings-menu">
+            <h1>Settings</h1>
+            <label for="return-button">Exit</label>
+            <button class="return-button"><img src="../images/x.svg" alt="Return"></button>
+
+            <label for="wallpaper">Choose wallpaper</label>
+            <input type="file" id="wallpaper" accept="image/*">
+        </div>
+    </div>
+
+    <script src="Script.js"></script>
+</body>
+
+</html>

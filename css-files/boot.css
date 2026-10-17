@@ -1,0 +1,15 @@
+#boot-screen {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(To bottom right, hsl(300, 50%, 30%), hsl(0, 0%, 0%));
+}
+
+#boot-screen h1 {
+    font-size: 100px;
+    color: hsl(0, 0%, 95%);
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
