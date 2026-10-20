@@ -130,7 +130,7 @@ function terminalCheck()
             case "-s":
                 if (commandParts[2] === "settings")
                     OpenSettings();
-                else if (commandParts[2] === "menu")
+                if (commandParts[2] === "menu")
                     OpenMenu();
                 break;
 
