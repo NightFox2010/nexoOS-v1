@@ -11,7 +11,7 @@
 
 #boot-screen h1 {
     font-size: 100px;
-    color: hsl(0, 0%, 95%);
+    color: var(--text-color);
 }
 
 .loader {

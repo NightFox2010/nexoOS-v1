@@ -6,6 +6,7 @@
 
 :root {
     --wallpaper: url(../images/wallpaper.png);
+    --text-color: hsl(0, 0%, 95%);
 }
 
 body {
