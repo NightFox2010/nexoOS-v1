@@ -78,7 +78,7 @@ document.querySelectorAll(".return-button").forEach(button => {
 // Close nexoOS
 
 function PowerOff() {
-    bootScreen.style.display = "block";
+    bootScreen.style.display = "flex";
     desktop.style.display = "none";
     document.querySelector("#boot-screen h1").textContent = "Shutting down";
 

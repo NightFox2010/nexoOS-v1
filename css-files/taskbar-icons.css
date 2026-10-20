@@ -1,11 +1,20 @@
-#clock {
-    position: absolute;
+#datetime {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: right;
-    right: 20px;
+    margin-left: auto;
+    text-align: center;
+    padding: 20px;
     color: hsl(0, 0%, 95%);
-    font-weight: 800;
+}
+
+#clock {
+    font-size: 16px;
+}
+
+#date {
+    font-size: 11px;
+    opacity: 0.75;
 }
 
 #terminal {

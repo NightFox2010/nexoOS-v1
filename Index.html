@@ -18,6 +18,7 @@
 <body>
     <div id="boot-screen">
         <h1>nexoOS v1</h1>
+        <div class="loader"></div>
     </div>
 
     <div id="desktop">
@@ -26,8 +27,10 @@
 
             <input type="text" id="terminal" name="terminal" placeholder="user@nexoOS:~$">
 
-            <div id="clock">00:00</div>
-            <div id="date">day month year</div>
+            <div id="datetime">
+                <div id="clock">00:00</div>
+                <div id="date">day month year</div>
+            </div>
         </div>
 
         <div id="menu-overlay"></div>
@@ -48,8 +51,11 @@
             <label for="return-button">Exit</label>
             <button class="return-button"><img src="../images/x.svg" alt="Return"></button>
 
-            <label for="wallpaper">Choose wallpaper</label>
-            <input type="file" id="wallpaper" accept="image/*">
+            <label for="wallpaper" class="file-button">
+                Choose Wallpaper
+            </label>
+
+            <input type="file" id="wallpaper" accept="image/*" hidden>
         </div>
     </div>
 
