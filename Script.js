@@ -33,9 +33,9 @@ setInterval(UpdateClock, 1000)
 
 function UpdateDate() {
     let currentDate = new Date();
-    let day = currentDate.day();
-    let month = currentDate.month();
-    let year = currentDate.year();
+    let day = currentDate.getDay();
+    let month = currentDate.getMonth() + 1;
+    let year = currentDate.getFullYear();
 
     document.getElementById("date").textContent = day + "." + month + "." + year;
 }
