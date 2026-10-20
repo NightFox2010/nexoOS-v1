@@ -18,7 +18,7 @@ function SwitchToDesktop() {
 
 setTimeout(SwitchToDesktop, 3000)
 
-// Taskbar clock
+// Taskbar icons
 
 function UpdateClock() {
     let currentTime = new Date();
@@ -30,6 +30,18 @@ function UpdateClock() {
 
 UpdateClock()
 setInterval(UpdateClock, 1000)
+
+function UpdateDate() {
+    let currentDate = new Date();
+    let day = currentDate.day();
+    let month = currentDate.month();
+    let year = currentDate.year();
+
+    document.getElementById("date").textContent = day + "." + month + "." + year;
+}
+
+UpdateDate()
+setInterval(UpdateDate, 1000)
 
 // Open and close main menu 
 
@@ -118,6 +130,8 @@ function terminalCheck()
             case "-s":
                 if (commandParts[2] === "settings")
                     OpenSettings();
+                else if (commandParts[2] === "menu")
+                    OpenMenu();
                 break;
 
             case "-p":
