@@ -1,151 +1,166 @@
-// Variables
+// DOM References
 
 const bootScreen = document.getElementById("boot-screen");
 const desktop = document.getElementById("desktop");
-const menu = document.getElementById("menu");
+const mainMenu = document.getElementById("menu");
 const menuOverlay = document.getElementById("menu-overlay");
 const settingsMenu = document.getElementById("settings-menu");
 
-let currentPlace = null;
+let currentView = null;
 
-// Loading screen
+
+// Boot Sequence
 
 function SwitchToDesktop() {
     bootScreen.style.display = "none";
-    desktop.style.display = "block"
-    currentPlace = "desktop";
+    desktop.style.display = "block";
+    currentView = "desktop";
 }
 
-setTimeout(SwitchToDesktop, 3000)
+setTimeout(SwitchToDesktop, 3000);
 
-// Taskbar icons
+
+// Taskbar
 
 function UpdateClock() {
-    let currentTime = new Date();
-    let hours = currentTime.getHours()
-    let minutes = String(currentTime.getMinutes()).padStart(2, "0");
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, "0");
 
-    document.getElementById("clock").textContent = hours + ":" + minutes;
+    document.getElementById("clock").textContent =
+        hours + ":" + minutes;
 }
 
-UpdateClock()
-setInterval(UpdateClock, 1000)
+UpdateClock();
+setInterval(UpdateClock, 1000);
+
 
 function UpdateDate() {
-    let currentDate = new Date();
-    let day = currentDate.getDay();
-    let month = currentDate.getMonth() + 1;
-    let year = currentDate.getFullYear();
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
 
-    document.getElementById("date").textContent = day + "." + month + "." + year;
+    document.getElementById("date").textContent =
+        day + "." + month + "." + year;
 }
 
-UpdateDate()
-setInterval(UpdateDate, 1000)
+UpdateDate();
+setInterval(UpdateDate, 1000);
 
-// Open and close main menu 
 
-function OpenMenu() {
-    menu.style.display = "block";
+// Main Menu Navigation
+
+function OpenMainMenu() {
+    mainMenu.style.display = "block";
     menuOverlay.style.display = "block";
-    currentPlace = "menu";
+    currentView = "menu";
 }
 
-function CloseProgram() {
-    if (currentPlace === "menu")
-    {
-        menu.style.display = "none";
+
+function CloseCurrentView() {
+    if (currentView === "menu") {
+        mainMenu.style.display = "none";
         menuOverlay.style.display = "none";
-        currentPlace = "desktop";
+        currentView = "desktop";
     }
-    else if (currentPlace === "settings")
-    {
+    else if (currentView === "settings") {
         settingsMenu.style.display = "none";
-        menu.style.display = "block";
-        currentPlace = "menu";
+        mainMenu.style.display = "block";
+        currentView = "menu";
     }
     else {
-        currentPlace = "desktop"
+        currentView = "desktop";
     }
 }
 
-document.getElementById("home-button").addEventListener("click", OpenMenu);
+
+document.getElementById("home-button")
+    .addEventListener("click", OpenMainMenu);
 
 document.querySelectorAll(".return-button").forEach(button => {
-    button.addEventListener("click", CloseProgram);
+    button.addEventListener("click", CloseCurrentView);
 });
 
-// Close nexoOS
 
-function PowerOff() {
+// System Power
+
+function ShutdownSystem() {
     bootScreen.style.display = "flex";
     desktop.style.display = "none";
-    document.querySelector("#boot-screen h1").textContent = "Shutting down";
+
+    document.querySelector("#boot-screen h1").textContent =
+        "Shutting down";
 
     setTimeout(() => window.close(), 2000);
 }
 
-document.getElementById("power-button").addEventListener("click", PowerOff);
+document.getElementById("power-button")
+    .addEventListener("click", ShutdownSystem);
 
-// Open settings
 
-function OpenSettings()
-{
-    menu.style.display = "none";
+// Settings
+
+function OpenSettingsMenu() {
+    mainMenu.style.display = "none";
     menuOverlay.style.display = "block";
     settingsMenu.style.display = "block";
-    currentPlace = "settings";
+    currentView = "settings";
 }
 
-document.getElementById("settings-button").addEventListener("click", OpenSettings);
+document.getElementById("settings-button")
+    .addEventListener("click", OpenSettingsMenu);
 
-// Change wallpaper
+
+// Wallpaper Management
 
 const wallpaperInput = document.getElementById("wallpaper");
 
-wallpaperInput.addEventListener("change", function() {
-    const image = wallpaperInput.files[0];
+wallpaperInput.addEventListener("change", function () {
+    const selectedWallpaper = wallpaperInput.files[0];
 
-    if (!image) return;
+    if (!selectedWallpaper) return;
 
-    const imageUrl = URL.createObjectURL(image);
+    const wallpaperUrl = URL.createObjectURL(selectedWallpaper);
 
     document.documentElement.style.setProperty(
         "--wallpaper",
-        `url("${imageUrl}")`
-    )
+        `url("${wallpaperUrl}")`
+    );
 });
+
 
 // Terminal
 
-function terminalCheck()
-{   
-    let terminalInput = document.getElementById("terminal").value;
-    let commandParts = terminalInput.split(" ");
+function ExecuteTerminalCommand() {
+    const terminalInput = document.getElementById("terminal").value;
+    const commandParts = terminalInput.split(" ");
 
-    if (commandParts[0] === "nexo" && commandParts.length === 3)
-    {
-        switch (commandParts[1])
-        {
+    if (commandParts[0] === "nexo" && commandParts.length === 3) {
+        switch (commandParts[1]) {
             case "-s":
                 if (commandParts[2] === "settings")
-                    OpenSettings();
+                    OpenSettingsMenu();
+
                 if (commandParts[2] === "menu")
-                    OpenMenu();
+                    OpenMainMenu();
+
                 break;
 
             case "-p":
                 if (commandParts[2] === "off")
-                    PowerOff();
+                    ShutdownSystem();
+
                 break;
         }
     }
 }
 
-document.getElementById("terminal").addEventListener("keydown", function(event) {
-    if (event.key === "Enter")
-    {
-        terminalCheck();
-        document.getElementById("terminal").value = "";
-    }
-});
+
+document.getElementById("terminal")
+    .addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            ExecuteTerminalCommand();
+            document.getElementById("terminal").value = "";
+        }
+    });
